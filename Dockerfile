@@ -1,7 +1,9 @@
 FROM ubuntu:18.04
 
-# Installing sudo & bash and updating
-RUN apt-get update && apt-get -y upgrade && apt-get install -y sudo bash
+# Adding ppa & Installing basic tools
+RUN apt-get update && apt-get -y upgrade && apt-get install -y sudo bash software-properties-common
+RUN add-apt-repository ppa:neovim-ppa/stable
+RUN apt-get update
 
 # Adding user
 RUN adduser --disabled-password --gecos '' cyper
@@ -22,10 +24,7 @@ RUN sudo sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/down
     -t half-life
 
 # Setting up nvim
-COPY src/nvim.appimage /home/cyper/
-RUN sudo chmod u+x nvim.appimage
-RUN ./nvim.appimage
-RUN sudo rm nvim.appimage
+RUN sudo apt-get install -y neovim
 RUN mkdir .config
 RUN mkdir .config/nvim
 RUN curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
