@@ -1,14 +1,34 @@
-# This version of Cyper will just zsh and spacevim installed
-
 FROM ubuntu:18.04
 
-# Updating & Upgrading
-RUN apt-get -y update
-RUN apt-get -y upgrade
+# Installing sudo & bash and updating
+RUN apt-get update && apt-get -y upgrade && apt-get install -y sudo bash
 
-# Installing dependencies 
-RUN apt install -y wget curl git tmux bash ctags unzip vim
+# Adding user
+RUN adduser --disabled-password --gecos '' cyper
+RUN adduser cyper sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Installing Zsh
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+# Setting user env
+USER cyper
+WORKDIR /home/cyper
+
+# Installing tools
+RUN sudo apt-get install -y build-essential ctags curl fuse gcc git make silversearcher-ag tmux unzip wget
+RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+RUN sudo apt-get install -y nodejs
+
+# Installing Zsh with Half Life shell theme
+RUN sudo sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
     -t half-life
+
+# Setting up nvim
+COPY src/nvim.appimage /home/cyper/
+RUN sudo chmod u+x nvim.appimage
+RUN ./nvim.appimage
+RUN sudo rm nvim.appimage
+RUN mkdir .config
+RUN mkdir .config/nvim
+RUN curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+COPY src/init.vim /home/cyper/.config/nvim/
+COPY src/coc-settings.json /home/cyper/.config/nvim/
