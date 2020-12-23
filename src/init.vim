@@ -11,7 +11,9 @@ Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 " Color config ----------------------------------------------------------------------------------------------
-set termguicolors
+if (has("termguicolors"))
+ set termguicolors
+endif
 set background=dark
 colorscheme medic_chalk
 
@@ -38,6 +40,7 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 function! OpenTerminal()
   split term://bash
   resize 10
+  set nonumber norelativenumber
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
 "" use alt+hjkl to move between split/vsplit panels
@@ -75,7 +78,7 @@ set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
-set number                              " Line numbers
+set number relativenumber               " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
