@@ -14,8 +14,7 @@ call plug#end()
 if (has("termguicolors"))
  set termguicolors
 endif
-set background=dark
-colorscheme medic_chalk
+silent! colorscheme medic_chalk
 
 " Nerd Tree config ------------------------------------------------------------------------------------------
 let g:NERDTreeShowHidden = 1
