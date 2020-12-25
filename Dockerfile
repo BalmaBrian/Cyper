@@ -1,33 +1,19 @@
-FROM ubuntu:18.04
+# Base image for the cyper editor is ubuntu since it is the most commently used linux distro amoung my peers
+FROM ubuntu:latest
 
-# Adding ppa & Installing basic tools
-RUN apt-get update && apt-get -y upgrade && apt-get install -y sudo bash software-properties-common
-RUN add-apt-repository ppa:neovim-ppa/stable
-RUN apt-get update
+# Installing updates and dependencies
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y sudo ctags curl wget man gcc make git vim
 
-# Adding user
+# Creating the user Cyper
 RUN adduser --disabled-password --gecos '' cyper
 RUN adduser cyper sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Setting user env
+# Seting up enviorment as Cyper
 USER cyper
 WORKDIR /home/cyper
-
-# Installing tools
-RUN sudo apt-get install -y build-essential ctags curl fuse gcc git make silversearcher-ag tmux unzip wget
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-
-# Installing Zsh with Half Life shell theme
-RUN sudo sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
     -t half-life
-
-# Setting up nvim
-RUN sudo apt-get install -y neovim
-RUN mkdir .config
-RUN mkdir .config/nvim
-RUN curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-COPY src/init.vim /home/cyper/.config/nvim/
-COPY src/coc-settings.json /home/cyper/.config/nvim/
+RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+RUN sh ~/.vim_runtime/install_awesome_vimrc.sh
