@@ -1,0 +1,66 @@
+[options]
+    colorscheme = "srcery"
+    colorscheme_bg = "dark"
+    enable_guicolors = false
+    statusline_separator = "nil"
+    statusline_iseparator = "bar"
+    buffer_index_type = 4
+    windows_index_type = 3
+    enable_tabline_filetype_icon = true
+    enable_statusline_mode = false
+    statusline_unicode_symbols = false
+    vimcompatible = true
+    statusline_separator = "nil"
+
+  # Enable autocomplete layer
+  [[layers]]
+  name = 'autocomplete'
+  auto-completion-return-key-behavior = "complete"
+  auto-completion-tab-key-behavior = "smart"
+
+  [[layers]]
+  name = "ui"
+
+  [[layers]]
+  name = 'shell'
+  default_position = 'bottom'
+  default_height = 35
+
+  [[layers]]
+  name = 'colorscheme'
+  enable = true
+
+  [[layers]]
+  name = 'lang#c'
+  enable = true
+
+  [[layers]]
+  name = 'lang#html'
+  enable = true
+
+  [[layers]]
+  name = 'lang#java'
+  enable = true
+
+  [[layers]]
+  name = 'lang#javascript'
+  enable = true
+
+  [[layers]]
+  name = 'lang#python'
+  enable = true
+
+  [[layers]]
+  name = 'lang#typescript'
+  enable = true
+
+  [[layers]]
+  name = 'git'
+  enable = true
+
+  [[layers]]
+  name = "versioncontrol"
+
+  [[layers]]
+  name = 'github'
+  enable = true
