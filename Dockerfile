@@ -1,33 +1,23 @@
-FROM ubuntu:18.04
+# This builds a alpine container with a vim development enviorment
+FROM alpine:latest
+WORKDIR /root
 
-# Adding ppa & Installing basic tools
-RUN apt-get update && apt-get -y upgrade && apt-get install -y sudo bash software-properties-common
-RUN add-apt-repository ppa:neovim-ppa/stable
-RUN apt-get update
+# Updating and installing tools
+RUN apk update
+RUN apk add asciinema bash build-base ctags curl gcc git neovim nodejs npm openjdk11 python3 py3-pip wget zsh-vcs
+RUN npm install -g npm@latest
+RUN npm install -g import-js --unsafe-perm
+RUN npm install -g eslint neovim typescript typescript-formatter
+RUN pip install isort pylint yapf
 
-# Adding user
-RUN adduser --disabled-password --gecos '' cyper
-RUN adduser cyper sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-# Setting user env
-USER cyper
-WORKDIR /home/cyper
-
-# Installing tools
-RUN sudo apt-get install -y build-essential ctags curl fuse gcc git make silversearcher-ag tmux unzip wget
-RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
-
-# Installing Zsh with Half Life shell theme
-RUN sudo sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+# Installing zsh with half life theme
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
     -t half-life
 
-# Setting up nvim
-RUN sudo apt-get install -y neovim
-RUN mkdir .config
-RUN mkdir .config/nvim
-RUN curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-COPY src/init.vim /home/cyper/.config/nvim/
-COPY src/coc-settings.json /home/cyper/.config/nvim/
+# Installing SpaceVim
+RUN curl -sLf https://spacevim.org/install.sh | bash
+RUN rm -r /root/.cache
+COPY src/.cache /root/.cache
+COPY src/init.toml /root/.SpaceVim.d/
+COPY src/vimproc_unix.so /root/.SpaceVim/bundle/vimproc.vim/lib/
+COPY src/main.shada /root/.local/share/nvim/shada/
