@@ -1,0 +1,272 @@
+*jsdoc.txt*	Generate JSDoc to your JavaScript code.
+
+Version: 2.1.1
+Author: NAKAMURA, Hisashi <https://github.com/sunvisor>
+Author: Shinya Ohynagi <sohyanagi@gmail.com>
+Repository: http://github.com/heavenshell/vim-jsdoc/
+License: BSD, see LICENSE for more details.
+
+==============================================================================
+CONTENTS					*jsdoc-vim-contents*
+
+Introduction		|jsdoc-vim-introduction|
+Install			|jsdoc-vim-install|
+Tutorial		|jsdoc-vim-tutorial|
+Variables		|jsdoc-vim-variables|
+
+==============================================================================
+INTRODUCTION					*jsdoc-vim-introduction*
+
+|jsdoc| is a generator of JSDoc.
+
+- This plugin based on https://gist.github.com/3903772#file-jsdoc-vim
+  written by NAKAMURA, Hisashi(https://gist.github.com/sunvisor)
+
+==============================================================================
+INSTALL						*jsdoc-vim-install*
+
+Install the distributed files into Vim runtime directory which is usually
+~/.vim/, or $HOME/vimfiles on Windows.
+
+If you install pathogen that provided from Tim Pope, you should extract the
+file into 'bundle' directory.
+
+Since ver 2.0.0, jsdoc.vim requires 'lehre'.
+Install 'lehre' from npm or hit following command.
+>
+  make install
+<
+==============================================================================
+TUTORIAL					*jsdoc-vim-tutorial*
+
+Define function to your code.
+>
+  function Foo(arg1, arg2) {
+  }
+
+  var obj = {
+    foo: function (arg1, arg2) {
+    }
+  };
+<
+  Set cursor on `function` line and type following.
+>
+  :JsDoc
+<
+  Then JsDoc put above `function` line.
+>
+  /**
+   * foo
+   * @param {} arg1
+   * @param {} arg2
+   */
+  function foo(arg1, arg2) {
+  }
+
+  var obj = {
+    /**
+     * foo
+     * @param {} arg1
+     * @param {} arg2
+     */
+    foo: function (arg1, arg2) {
+    }
+  };
+<
+Typed params and return type.
+>
+  function foo(foo: string): string {
+    return 'foo'
+  }
+<
+  Set cursor on `function` line and type following.
+>
+  :JsDoc
+>
+  /**
+   * foo
+   *
+   * @param {string} foo
+   * @returns {string}
+   */
+  function foo(foo: string): string {
+    return 'foo'
+  }
+<
+  param and return type are generate dynamically.
+
+==============================================================================
+VARIABLES					*jsdoc-vim-variables*
+
+g:jsdoc_templates_path					*g:jsdoc_templates_path*
+		Path to custom template.
+
+		Default value is ''
+
+g:jsdoc_formatter			  		*g:jsdoc_formatter*
+		Document block formatter. Can choose from 'jsdoc', 'esdoc'
+		and 'tsdoc'.
+
+		Default value is 'jsdoc'
+
+g:jsdoc_lehre_path					*g:jsdoc_lehre_path*
+		Path to lehre.
+
+		Default value is './lib/lehre'
+>
+==============================================================================
+CHANGELOG					*jsdoc-changelog*
+2020-10-10
+- Fix async bug
+  See https://github.com/heavenshell/vim-jsdoc/issues/99 details.
+  (thx @holtc)
+
+2020-06-27
+- Add Neovim support
+  See https://github.com/heavenshell/vim-jsdoc/pull/92 details.
+  (thx @Cyperwu @vimark1)
+
+2020-04-26
+- Ver 2.0.0
+  See https://github.com/heavenshell/vim-jsdoc/issues/81 details.
+
+2020-04-25
+- Freeze 1.0.0
+
+2017-01-28
+- Fix an optional parameter and default value.
+  see https://github.com/heavenshell/vim-jsdoc/issues/64 details.
+  (thx @codeinabox)
+
+2016-10-30
+- Fix missing @param around single function argument.
+  see https://github.com/heavenshell/vim-jsdoc/issues/61 details.
+  (thx @rpereira)
+
+2016-09-11
+- Add g:jsdoc_user_defined_tags option for insert custom tags.
+
+2016-09-11
+- Fix private, public bug.
+
+2016-08-30
+- Add typed params and return type, such as TypeScript, support
+
+2016-05-09
+- Add more builtin types for autocompletion
+  (thx @jacoborus)
+
+2016-05-03
+- Add ES2015 class.
+- Add @static support.
+
+2016-04-30
+- Add TypeScript support.
+  (thx @faceleg)
+
+2016-04-30
+- vimlint and function generator regex support.
+  See https://github.com/heavenshell/vim-jsdoc/pull/54 details.
+  (thx @davidosomething)
+
+- fix unbalanced parens in arrow regex.
+  See https://github.com/heavenshell/vim-jsdoc/pull/52 details.
+  (thx @davidosomething)
+
+2016-01-23
+- Add full regex mode for jsdoc_custom_args_hook
+  (thx @davidosomething)
+
+2015-12-14
+- Adds support for tag synonyms.
+  (thx @ryanoasis)
+
+2015-09-12
+- Tiny refactor.
+  Change regex declaration local scope to script scope for not eval every
+  method call.
+
+2015-09-06
+- g:jsdoc_allow_shorthand is deprecated. Use g:jsdoc_enable_es6 instead.
+
+2015-09-05
+- Add g:jsdoc_enable_es6.
+  If g:jsdoc_enable_es6 is '1', JSDoc vim can use Arrow function.
+  See https://github.com/heavenshell/vim-jsdoc/labels/enhancement
+
+2015-08-29
+- Add g:jsdoc_type_hook.
+  See https://github.com/heavenshell/vim-jsdoc/issues/36 details.
+
+2015-08-28
+- Add function and array to tab completion
+  (thx @jacoborus)
+
+2015-07-18
+- Remove g:jsdoc_default_mapping.
+  See https://github.com/heavenshell/vim-jsdoc/issues/33 details.
+
+2015-06-20
+- Fixes Spelling and formatting.
+  (thx @ryanoasis)
+
+2015-06-19
+- Fixes the jsdoc comment format.
+  (thx @IonicaBizau)
+
+2015-06-10
+- Add g:jsdoc_custom_args_hook to override default type and description.
+
+2015-05-27
+- Add separator between @param's name and description for better readability.
+  (thx @aars)
+
+2015-04-28
+- Allowing for generator function detection.
+  (thx @andjosh)
+
+2015-04-05
+- Omit return tag if the input for return type is blank.
+  (thx @glifchits)
+
+2015-03-21
+- Fix minor spelling.
+  added tab auto completion for js types.
+  added screencast to show basic functionality and tab completion.
+  (thx @ryanoasis)
+
+2015-03-02
+- Fix g:jsdoc_access_descriptions behavior reversed.
+  (thx @hbetts)
+
+2015-01-16
+- Add g:jsdoc_allow_shorthand to allow ECMAScript6 shorthand syntax.
+
+2015-01-15
+- Add g:jsdoc_access_descriptions to set access tags.
+- Add g:jsdoc_underscore_private to set underscore starting function as
+  private.
+  (thx @ryanoasis)
+
+2014-06-05
+- Add {undefined} as a default type of @return.
+  (thx @verkholantsev)
+
+2013-07-07
+- Add g:jsdoc_default_mapping option, making it possible to prevent automatic
+  <C-l> mapping.
+
+2013-05-30
+- Fix @return tag is only added g:jsdoc_allow_input_prompt enabled
+  (thx @thomasbelin4)
+
+2013-05-01
+- Add g:jsdoc_input_params to allow prompt @param, @return.
+
+2013-04-30
+- Add prompts for param types & return type (thx @faceleg)
+
+2013-03-13
+- Fix to work special character(number, $, _) included function(thx @mollifier)
+
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:

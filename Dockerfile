@@ -17,7 +17,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 # Installing SpaceVim
 RUN curl -sLf https://spacevim.org/install.sh | bash
 RUN rm -r /root/.cache
-COPY src/.cache /root/.cache
+COPY src/cache /root/.cache
 COPY src/init.toml /root/.SpaceVim.d/
 COPY src/vimproc_unix.so /root/.SpaceVim/bundle/vimproc.vim/lib/
 COPY src/main.shada /root/.local/share/nvim/shada/
