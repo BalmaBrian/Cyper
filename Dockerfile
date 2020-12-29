@@ -4,9 +4,10 @@ WORKDIR /root
 
 # Updating and installing tools
 RUN apk update
-RUN apk add asciinema bash build-base ctags curl gcc git neovim nodejs npm openjdk11 python3 py3-pip wget zsh-vcs
+RUN apk add asciinema bash build-base ctags curl gcc gifsicle git imagemagick neovim nodejs npm openjdk11 openssh python3 py3-pip wget zsh-vcs
 RUN npm install -g npm@latest
 RUN npm install -g import-js --unsafe-perm
+RUN npm install -g asciicast2gif --unsafe-perm
 RUN npm install -g eslint neovim typescript typescript-formatter
 RUN pip install isort pylint yapf
 
