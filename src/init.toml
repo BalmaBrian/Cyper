@@ -22,9 +22,13 @@
   name = "ui"
 
   [[layers]]
+  name = "format"
+  enable = true
+
+  [[layers]]
   name = 'shell'
   default_position = 'bottom'
-  default_height = 35
+  default_height = 20
 
   [[layers]]
   name = 'colorscheme'
@@ -33,26 +37,32 @@
   [[layers]]
   name = 'lang#c'
   enable = true
+  format_on_save = false
 
   [[layers]]
   name = 'lang#html'
   enable = true
+  format_on_save = false
 
   [[layers]]
   name = 'lang#java'
   enable = true
+  format_on_save = true
 
   [[layers]]
   name = 'lang#javascript'
   enable = true
+  format_on_save = true
 
   [[layers]]
   name = 'lang#python'
   enable = true
+  format_on_save = true
 
   [[layers]]
   name = 'lang#typescript'
   enable = true
+  format_on_save = true
 
   [[layers]]
   name = 'git'
