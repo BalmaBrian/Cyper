@@ -1,7 +1,7 @@
 [options]
-    colorscheme = "srcery"
+    colorscheme = "one"
     colorscheme_bg = "dark"
-    enable_guicolors = false
+    enable_guicolors = true
     statusline_separator = "nil"
     statusline_iseparator = "bar"
     buffer_index_type = 4
@@ -12,65 +12,68 @@
     vimcompatible = true
     statusline_separator = "nil"
 
-  # Enable autocomplete layer
-  [[layers]]
+# Enable autocomplete layer
+[[layers]]
   name = 'autocomplete'
   auto-completion-return-key-behavior = "complete"
   auto-completion-tab-key-behavior = "smart"
 
-  [[layers]]
+[[layers]]
   name = "ui"
 
-  [[layers]]
+[[layers]]
+  name = "tmux"
+
+[[layers]]
   name = "format"
   enable = true
 
-  [[layers]]
+[[layers]]
   name = 'shell'
   default_position = 'bottom'
   default_height = 20
 
-  [[layers]]
+[[layers]]
   name = 'colorscheme'
   enable = true
 
-  [[layers]]
+[[layers]]
   name = 'lang#c'
   enable = true
   format_on_save = false
 
-  [[layers]]
+[[layers]]
   name = 'lang#html'
   enable = true
   format_on_save = false
 
-  [[layers]]
+[[layers]]
   name = 'lang#java'
   enable = true
   format_on_save = true
 
-  [[layers]]
+[[layers]]
   name = 'lang#javascript'
   enable = true
   format_on_save = true
 
-  [[layers]]
+[[layers]]
   name = 'lang#python'
   enable = true
   format_on_save = true
 
-  [[layers]]
+[[layers]]
   name = 'lang#typescript'
   enable = true
   format_on_save = true
 
-  [[layers]]
+[[layers]]
   name = 'git'
   enable = true
 
-  [[layers]]
+[[layers]]
   name = "versioncontrol"
 
-  [[layers]]
+[[layers]]
   name = 'github'
   enable = true
