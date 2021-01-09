@@ -1,5 +1,5 @@
 [options]
-    colorscheme = "one"
+    colorscheme = "srcery"
     colorscheme_bg = "dark"
     enable_guicolors = true
     statusline_separator = "nil"
@@ -29,51 +29,54 @@
   enable = true
 
 [[layers]]
-  name = 'shell'
-  default_position = 'bottom'
-  default_height = 20
+  name = "shell"
+  default_position = "bottom"
+  default_height = 25
 
 [[layers]]
-  name = 'colorscheme'
+  name = "colorscheme"
   enable = true
 
 [[layers]]
-  name = 'lang#c'
-  enable = true
-  format_on_save = false
-
-[[layers]]
-  name = 'lang#html'
+  name = "lang#c"
   enable = true
   format_on_save = false
 
 [[layers]]
-  name = 'lang#java'
+  name = "lang#html"
+  enable = true
+  format_on_save = false
+
+[[layers]]
+  name = "lang#markdown"
+
+[[layers]]
+  name = "lang#java"
   enable = true
   format_on_save = true
 
 [[layers]]
-  name = 'lang#javascript'
+  name = "lang#javascript"
   enable = true
   format_on_save = true
 
 [[layers]]
-  name = 'lang#python'
+  name = "lang#python"
   enable = true
   format_on_save = true
 
 [[layers]]
-  name = 'lang#typescript'
+  name = "lang#typescript"
   enable = true
   format_on_save = true
 
 [[layers]]
-  name = 'git'
+  name = "git"
   enable = true
 
 [[layers]]
   name = "versioncontrol"
 
 [[layers]]
-  name = 'github'
+  name = "github"
   enable = true
