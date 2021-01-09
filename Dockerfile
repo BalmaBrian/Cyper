@@ -8,7 +8,7 @@ RUN apk add asciinema bash build-base ctags curl gcc gifsicle git imagemagick ne
 RUN npm install -g npm@latest
 RUN npm install -g import-js --unsafe-perm
 RUN npm install -g asciicast2gif --unsafe-perm
-RUN npm install -g eslint neovim typescript typescript-formatter
+RUN npm install -g eslint vscode-html-languageserver-bin neovim prettier remark remark-cli remark-stringify remark-frontmatter wcwidth typescript typescript-formatter
 RUN pip install isort pylint yapf
 
 # Installing zsh with half life theme
